@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define LARG_IMG 2560
-#define ALTU_IMG 1600
+#define WIDHT_IMG 2560
+#define HEIGHT_IMG 1600
 
-// this header will create the ppm
+
 
 struct Pixel {
   unsigned char r, g, b;
@@ -41,11 +41,12 @@ char *leLinha(FILE *f) {
   return str;
 }
 
-void createPPM(char nomeArq[], struct Pixel img[ALTU_IMG][LARG_IMG]) {
+// function that builds .ppm
+void createPPM(char nomeArq[], struct Pixel img[HEIGHT_IMG][WIDHT_IMG]) {
   int tam;
   FILE *f = fopen(nomeArq, "wb");
-  fprintf(f, "P6\n%d %d\n255\n", LARG_IMG, ALTU_IMG);
-  tam = LARG_IMG * ALTU_IMG;
+  fprintf(f, "P6\n%d %d\n255\n", WIDHT_IMG, HEIGHT_IMG);
+  tam = WIDHT_IMG * HEIGHT_IMG;
   if (fwrite(&img[0][0], 3, tam, f) != tam) {
     printf("O arquivo de imagem nao foi gravado corretamente.\n");
     exit(1);
