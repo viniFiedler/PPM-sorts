@@ -7,7 +7,11 @@
 #define WIDHT_IMG 2560
 #define HEIGHT_IMG 1600
 
-
+struct coord
+{
+    int x;
+    int y;
+};
 
 struct Pixel {
   unsigned char r, g, b;
