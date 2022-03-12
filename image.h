@@ -7,11 +7,7 @@
 #define WIDHT_IMG 2560
 #define HEIGHT_IMG 1600
 
-struct coord
-{
-    int x;
-    int y;
-};
+
 
 struct Pixel {
   unsigned char r, g, b;
@@ -46,13 +42,16 @@ char *leLinha(FILE *f) {
 }
 
 // function that builds .ppm
-void createPPM(char nomeArq[], struct Pixel img[HEIGHT_IMG][WIDHT_IMG]) {
+void createPPM(char fileName[], struct Pixel img[HEIGHT_IMG][WIDHT_IMG]) {
   int tam;
-  FILE *f = fopen(nomeArq, "wb");
+
+  FILE *f = fopen(fileName, "wb");
   fprintf(f, "P6\n%d %d\n255\n", WIDHT_IMG, HEIGHT_IMG);
+
   tam = WIDHT_IMG * HEIGHT_IMG;
+
   if (fwrite(&img[0][0], 3, tam, f) != tam) {
-    printf("O arquivo de imagem nao foi gravado corretamente.\n");
+    printf("Error file wasn't properly recorded\n");
     exit(1);
   }
   fclose(f);

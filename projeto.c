@@ -44,48 +44,62 @@ void makeSquarePPM(struct Pixel image[HEIGHT_IMG][WIDHT_IMG],int sizeOfEachSquar
 
 
 // Make a column from a giving point
-void makeColumnPPM(struct Pixel image[HEIGHT_IMG][WIDHT_IMG],int quantiyOfSquares, int sizeOfEachSquares,struct Coord pos)
+void makeColumnPPM(struct Pixel image[HEIGHT_IMG][WIDHT_IMG],int quantityOfSquares, int sizeOfEachSquare,struct Coord pos)
 {
     int i;
     int j;
     pos.y = HEIGHT_IMG - pos.y;
-    for(i = 0; i < quantiyOfSquares && pos.y < WIDHT_IMG - 100; i++)
+    for(i = 0; i < quantityOfSquares && pos.y < WIDHT_IMG - 100; i++)
         {
         
-            makeSquarePPM(image, sizeOfEachSquares, pos);
-            pos.y += sizeOfEachSquares - (10) - 2 * sizeOfEachSquares;
+            makeSquarePPM(image, sizeOfEachSquare, pos);
+
+            // Number of pixels will be jumped between each square
+            pos.y += sizeOfEachSquare - (5) - 2 * sizeOfEachSquare;
         }
     
 }
-//Put white Squares on background. Each node at numberBlock is a colunm and it's value represent the number of Square in that colunm. 
-void doSquarePPM(struct Pixel image[HEIGHT_IMG][WIDHT_IMG], int numberOfSquares[],int quantiyOfSquares)
+// Put white Squares on background. Each node at numberBlock is a colunm and it's value represent the number of Square in that colunm. 
+void doTablePPM(struct Pixel image[HEIGHT_IMG][WIDHT_IMG], int quantityOfSquaresInEachColumn[],int quantityOfcolumns)
 {
-    quantiyOfSquares = 10;
-    int spaceHeight = HEIGHT_IMG/10;
-    int spaceWIDHT = WIDHT_IMG/20;
+    struct Coord pos;
+    int i;
+    int biggestColumn = 0;
+    int sizeOfEachSquare;
 
+    for(i = 0; i < quantityOfcolumns; i++)
+    {
+
+        if(quantityOfSquaresInEachColumn[i] > biggestColumn)
+            biggestColumn = quantityOfSquaresInEachColumn[i];
+            
+    }
+    
+
+    if(biggestColumn >= quantityOfcolumns)
+        {
+            sizeOfEachSquare = (HEIGHT_IMG - 100 - (biggestColumn * 5))/(biggestColumn + 2);
+        }
+    else
+        {
+             sizeOfEachSquare = (HEIGHT_IMG - 100 - (quantityOfcolumns * 5))/(quantityOfcolumns + 2);
+        }
+
+        pos.x = pos.y = sizeOfEachSquare;
+        
+
+
+        printf("size of Each %d\n",sizeOfEachSquare);
+    
+    makeColumnPPM(image,quantityOfSquaresInEachColumn[0],sizeOfEachSquare,pos);
 }
 
 
 int main()
 {   
-    struct Coord pos;
-    pos.x = 20;
-    pos.y = 100;
+
+    int columns[11] = {40,1,1,10,1,1,1,1,1,1,2};
     doBackgroundPPM(image);
-    //makeSquarePPM(image,100,pos);
-    makeColumnPPM(image,14,100,pos);
-    pos.x += 120;
-    makeColumnPPM(image,14,100,pos);
-    pos.x += 120;
-    makeColumnPPM(image,14,100,pos);
-    pos.x += 120;
-    makeColumnPPM(image,14,100,pos);
-    pos.x += 120;
-    makeColumnPPM(image,14,100,pos);
-    pos.x += 120;
-    makeColumnPPM(image,14,100,pos);
-    pos.x += 120;
-    makeColumnPPM(image,14,100,pos);
+    doTablePPM(image,columns,11);
     createPPM("Teste Imagem",image);
 }
