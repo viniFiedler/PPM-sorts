@@ -3,7 +3,7 @@
 ### About
 This project produces one .ppm for each step of the selected sorting algorithm.
 
-Inspired by videos like [those ones](https://www.youtube.com/watch?v=8MsTNqK3o_w&t=2775s&ab_channel=Musicombo).
+Inspired by videos like [these ones](https://www.youtube.com/watch?v=8MsTNqK3o_w&t=2775s&ab_channel=Musicombo).
 
 Don't take this Repo too serious, its just a compile from my first year at college.
 
