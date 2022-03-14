@@ -17,7 +17,7 @@ $ sudo apt install build-essential
 $ sudo apt-get install manpages-dev
 
 # Clone repo
-$ git clone <https://github.com/viniFiedler/ProjetoFimDeAno>
+$ git clone <https://github.com/viniFiedler/PPM-sorts>
 
 # Compile
 $ gcc projeto.c -o projeto
