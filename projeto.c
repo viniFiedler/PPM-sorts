@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "image.h"
-#define BLACK 0, 0, 0
+#define BLACK 0, 0, 255
 #define WHITE 255, 255, 255
 
 struct Pixel image[HEIGHT_IMG][WIDHT_IMG];
@@ -78,28 +78,36 @@ void doTablePPM(struct Pixel image[HEIGHT_IMG][WIDHT_IMG], int quantityOfSquares
 
     if(biggestColumn >= quantityOfcolumns)
         {
-            sizeOfEachSquare = (HEIGHT_IMG - 100 - (biggestColumn * 5))/(biggestColumn + 2);
+            sizeOfEachSquare = (HEIGHT_IMG - (biggestColumn * 5))/(biggestColumn);
         }
     else
         {
-             sizeOfEachSquare = (HEIGHT_IMG - 100 - (quantityOfcolumns * 5))/(quantityOfcolumns + 2);
+             sizeOfEachSquare = (HEIGHT_IMG - (quantityOfcolumns * 5))/(quantityOfcolumns);
         }
 
-        pos.x = pos.y = sizeOfEachSquare;
+        pos.y = sizeOfEachSquare;
         
+        int increasX = (WIDHT_IMG)/quantityOfcolumns;
+        pos.x = (WIDHT_IMG - (increasX * quantityOfcolumns) + increasX - sizeOfEachSquare)/2 ;
 
-
-        printf("size of Each %d\n",sizeOfEachSquare);
     
-    makeColumnPPM(image,quantityOfSquaresInEachColumn[0],sizeOfEachSquare,pos);
+    for(i = 0; i < quantityOfcolumns; i++)
+    {
+        makeColumnPPM(image,quantityOfSquaresInEachColumn[i],sizeOfEachSquare,pos);
+        pos.x += increasX;
+    }
+    
 }
+
+
+
 
 
 int main()
 {   
 
-    int columns[11] = {40,1,1,10,1,1,1,1,1,1,2};
+    int columns[21] = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,7};
     doBackgroundPPM(image);
-    doTablePPM(image,columns,11);
+    doTablePPM(image,columns,5);
     createPPM("Teste Imagem",image);
 }
