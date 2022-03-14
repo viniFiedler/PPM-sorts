@@ -8,7 +8,7 @@ Inspired by videos like [these one](https://www.youtube.com/watch?v=8MsTNqK3o_w&
 Don't take this Repo too serious, its just a compile from my first year at college.
 
 
-## How to install an Execute
+## How to install and Execute
 
 ```bash
 
